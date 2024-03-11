@@ -1,20 +1,10 @@
-prometheus.exporter.postgres "example" {
-        data_source_names = ["postgresql://productcatalog:productcatalog@productcatalog_postgres:5432/productcatalog?sslmode=disable"]
-      }
+declare "db" {
+    argument "names" {}
+    prometheus.exporter.postgres "db" {
+        data_source_names = names
+    }
 
-      discovery.relabel "postgres_relabel" {
-        targets = prometheus.exporter.postgres.example.targets
-        rule {
-          target_label  = "job"
-          replacement = "ecommerce/productcatalog_postgres"
-        }
-      }
-
-prometheus.scrape "default" {
-  targets    = prometheus.exporter.postgres.example.targets
-  forward_to = [prometheus.remote_write.demo.receiver]
+    export "targets" {
+        value = prometheus.exporter.postgres.db.targets
+    }
 }
-
-declare "postgres" {
-        component = prometheus.exporter.postgres
-        data_source_names = ["postgresql://productcatalog:productcatalog@productcatalog_postgres:5432/productcatalog?sslmode=disable"]
