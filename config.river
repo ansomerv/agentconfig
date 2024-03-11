@@ -15,3 +15,6 @@ prometheus.scrape "default" {
   forward_to = [prometheus.remote_write.demo.receiver]
 }
 
+declare "postgres" {
+        component = prometheus.exporter.postgres
+        data_source_names = ["postgresql://productcatalog:productcatalog@productcatalog_postgres:5432/productcatalog?sslmode=disable"]
