@@ -1,0 +1,17 @@
+prometheus.exporter.postgres "example" {
+        data_source_names = ["postgresql://productcatalog:productcatalog@productcatalog_postgres:5432/productcatalog?sslmode=disable"]
+      }
+
+      discovery.relabel "postgres_relabel" {
+        targets = prometheus.exporter.postgres.example.targets
+        rule {
+          target_label  = "job"
+          replacement = "ecommerce/productcatalog_postgres"
+        }
+      }
+
+prometheus.scrape "default" {
+  targets    = prometheus.exporter.postgres.example.targets
+  forward_to = [prometheus.remote_write.demo.receiver]
+}
+
