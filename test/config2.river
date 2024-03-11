@@ -2,10 +2,6 @@ declare "db" {
     prometheus.exporter.postgres "db" {
         data_source_names = ["postgresql://productcatalog:productcatalog@productcatalog_postgres:5432/productcatalog?sslmode=disable"]
     }
-  prometheus.exporter.postgres "orders" {
-        data_source_names = ["postgresql://fake:orders@productcatalog_postgres:5432/productcatalog?sslmode=disable"]
-    }
-
 
       discovery.relabel "postgres_relabel" {
         targets = prometheus.exporter.postgres.db.targets
