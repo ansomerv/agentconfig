@@ -1,5 +1,5 @@
 declare "db" {
-    argument "names" {"postgresql://productcatalog:productcatalog@productcatalog_postgres:5432/productcatalog?sslmode=disable"}
+    argument "names" {}
     prometheus.exporter.postgres "db" {
         data_source_names = argument.names.value
     }
