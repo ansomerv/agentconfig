@@ -4,7 +4,17 @@ declare "db" {
         data_source_names = argument.names.value
     }
 
+
+      discovery.relabel "postgres_relabel" {
+        targets = prometheus.exporter.postgres.db.targets
+        rule {
+          target_label  = "job"
+          replacement = "ecommerce/productcatalog_postgres"
+        }
+      }
+
     export "targets" {
-        value = prometheus.exporter.postgres.db.targets
+        value = discovery.relabel.postgres_relabel.output
     }
 }
+
