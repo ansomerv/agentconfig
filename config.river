@@ -1,4 +1,4 @@
-declare "db" {
+declare  {
     prometheus.exporter.postgres "db" {
         data_source_names = ["postgresql://productcatalog:productcatalog@productcatalog-postgres-ecommerce:5432/productcatalog?sslmode=disable"]
     }
