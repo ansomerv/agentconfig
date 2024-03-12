@@ -1,9 +1,7 @@
 declare "db" {
+    argument "names" {}
     prometheus.exporter.postgres "db" {
-        data_source_names = ["postgresql://productcatalog:productcatalog@productcatalog_postgres:5432/productcatalog?sslmode=disable"]
-    }
-  prometheus.exporter.postgres "orders" {
-        data_source_names = ["postgresql://fake:orders@productcatalog_postgres:5432/productcatalog?sslmode=disable"]
+        data_source_names = argument.names.value
     }
 
 
@@ -15,16 +13,7 @@ declare "db" {
         }
       }
 
-      discovery.relabel "postgres_relabel_orders" {
-        targets = prometheus.exporter.postgres.orders.targets
-        rule {
-          target_label  = "job"
-          replacement = "ecommerce/orders_postgres"
-        }
-      }
-
     export "targets" {
-        value = concat(discovery.relabel.postgres_relabel.output, discovery.relabel.postgres_relabel_orders.output)
+        value = discovery.relabel.postgres_relabel.output
     }
 }
-
