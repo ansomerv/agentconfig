@@ -1,9 +1,7 @@
 declare "db" {
-    argument "names" {}
     prometheus.exporter.postgres "db" {
-        data_source_names = argument.names.value
+        data_source_names = ["postgresql://productcatalog:productcatalog@productcatalog_postgres:5432/productcatalog?sslmode=disable"]
     }
-
 
       discovery.relabel "postgres_relabel" {
         targets = prometheus.exporter.postgres.db.targets
@@ -12,6 +10,7 @@ declare "db" {
           replacement = "ecommerce/productcatalog_postgres"
         }
       }
+
 
     export "targets" {
         value = discovery.relabel.postgres_relabel.output
