@@ -7,7 +7,7 @@ declare "db" {
         targets = prometheus.exporter.postgres.db.targets
         rule {
           target_label  = "job"
-          replacement = "xxxecommerce/productcatalog_postgres"
+          replacement = "ecommerce/productcatalog_postgres"
         }
       }
     export "targets" {
