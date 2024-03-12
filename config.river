@@ -1,9 +1,9 @@
 declare "db" {
     prometheus.exporter.postgres "db" {
-        data_source_names = ["postgresql://FAKE:productcatalog@productcatalog-postgres-ecommerce:5432/productcatalog?sslmode=disable"]
+        data_source_names = ["postgresql://FAKE22:productcatalog@productcatalog-postgres-ecommerce:5432/productcatalog?sslmode=disable"]
     }
   prometheus.exporter.postgres "orders" {
-        data_source_names = ["postgresql://FAKE:orders@orders-postgres:5432/orders?sslmode=disable"]
+        data_source_names = ["postgresql://FAKE33:orders@orders-postgres:5432/orders?sslmode=disable"]
     }
 
 
