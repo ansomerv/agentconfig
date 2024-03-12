@@ -4,6 +4,6 @@ declare "db" {
     }
 
     export "targets" {
-        value = discovery.relabel.postgres_relabel.output
+        value = prometheus.exporter.postgres.db.output
     }
 }
