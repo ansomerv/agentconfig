@@ -22,6 +22,6 @@ declare "db" {
       }
 
     export "targets" {
-        value = concat(discovery.relabel.postgres_relabel.output, discovery.relabel.postgres_relabel_orders.output)`
+        value = concat(discovery.relabel.postgres_relabel.output, discovery.relabel.postgres_relabel_orders.output)
     }
 }
